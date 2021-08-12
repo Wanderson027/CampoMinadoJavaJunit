@@ -2,6 +2,7 @@ package br.com.cod3r.cm.modelo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import br.com.cod3r.cm.excecao.ExplosaoException;
 
@@ -76,5 +77,47 @@ public class Campo {
 	}
 	public boolean isAberto() {
 		return aberto;
+	}
+	
+	public boolean isFechado () {
+		return !isAberto();
+	}
+
+	public int getLinha() {
+		return linha;
+	}
+
+	public int getColuna() {
+		return coluna;
+	}
+	
+	boolean objetivoAlcancado () {
+		boolean desvendado = !minado && aberto;
+		boolean protegido = minado && marcado;
+		return desvendado || protegido;
+	}
+	
+	long minasVizinhanca () {
+		return vizinhos.stream().filter(v  -> v.minado).count();
+	}
+	
+	void reiniciar () {
+		aberto = false;
+		minado = false;
+		marcado = false;
+	}
+	
+	public String toString(){
+		if(marcado ) {
+			return "x";
+		}else if(aberto && minado ) {
+			return "*";
+		}else if(aberto && minasVizinhanca() > 0) {
+			return Long.toString(minasVizinhanca());
+		}else if(aberto) {
+			return " ";
+		}else {
+			return "?";
+		}
 	}
 }

@@ -126,13 +126,44 @@ public class CampoTeste {
 	void testeVizinhoSeguro () {
 		Campo campo11 = new Campo(1, 1);
 		Campo campo22 = new Campo(2, 2);
-		
 		campo22.adicionarVizinho(campo11);
+		
 		campo.adicionarVizinho(campo22);
 		campo.abrir();
-		assertTrue(campo22.isAberto() && campo22.isAberto());
+		assertTrue(campo22.isAberto() && campo11.isAberto());
 	}
 	
+	@Test
+	void abriComVizinho2 () {
+		Campo campo11 = new  Campo(1, 1);
+		Campo campo12 = new Campo (1, 1);
+		campo12.minar();
+		
+		Campo campo22 = new Campo(2,2);
+		campo22.adicionarVizinho(campo11);
+		campo22.adicionarVizinho(campo12);
+		
+		campo.adicionarVizinho(campo22);
+		campo.abrir();
+		
+		assertTrue(campo22.isAberto() && campo11.isFechado());
+		
+		
+	}
+	
+	@Test
+	void testarObjetivoFoiAlcancado () {
+		Campo campo1 = new Campo(3,2);
+		campo1.abrir();
+		campo1.minar();
+		campo1.alternarMarcação();
+		
+		Campo campo2 = new Campo(3,4);
+		campo1.minar();
+		campo1.abrir();
+		
+		assertTrue(campo1.objetivoAlcancado() && campo2.objetivoAlcancado());
+	}
 	
 }
 
