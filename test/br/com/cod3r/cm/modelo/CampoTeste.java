@@ -155,15 +155,49 @@ public class CampoTeste {
 	void testarObjetivoFoiAlcancado () {
 		Campo campo1 = new Campo(3,2);
 		campo1.abrir();
-		campo1.minar();
-		campo1.alternarMarcação();
+		campo1.objetivoAlcancado();
 		
 		Campo campo2 = new Campo(3,4);
-		campo1.minar();
-		campo1.abrir();
+		campo2.minar();
+		campo2.alternarMarcação();
+		campo2.objetivoAlcancado();
 		
 		assertTrue(campo1.objetivoAlcancado() && campo2.objetivoAlcancado());
 	}
+	@Test
+	void testeReinicioCampos() {
+		 Campo campo1 = new Campo(2,2);
+		 campo1.reiniciar();
+	}
 	
+	@Test
+	 void testeToStringMarcado() {
+		Campo campo1 = new Campo(2,2);
+		campo1.alternarMarcação();
+		campo1.toString();
+		
+	}
+	
+	@Test
+	void testeToStringAbrirEMinar() {
+		Campo campo2 = new Campo(2,2);
+		campo2.abrir();
+		campo2.minar();
+		campo2.toString();
+	}
+	
+	@Test
+	void testeToStingAbertoSemMinasVizinhas() {
+		Campo campo2 = new Campo(2,2);
+		campo2.abrir();
+		campo2.minasVizinhanca();
+		campo2.toString();
+	}
+	
+//	@Test
+//	void testeToStingAbertoElses() {
+//		Campo campo2 = new Campo(2,2);
+//		campo2.toString();
+//	}
 }
 
